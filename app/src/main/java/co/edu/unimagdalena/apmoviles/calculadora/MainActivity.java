@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText dato;
     Boolean operador = false;
     long acum = 0;
+    float divi = 0;
+    Boolean igual = false;
+    long auxiliar = 0;
     String op;
 
     @Override
@@ -65,10 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         String valor;
-        long num = 0;
+        float num = 0;
         if(!TextUtils.isEmpty(dato.getText().toString())){
-            num  = Integer.parseInt(dato.getText().toString());
-            valor = dato.getText().toString();
+            num  = Float.parseFloat(dato.getText().toString());
+            valor = dato.getText().toString() + "";
         }else{
             valor = "";
         }
@@ -117,11 +121,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dato.setText(valor);
                 break;
             case R.id.btnmas:
-                if(!operador){
-                    acum = Integer.parseInt(dato.getText().toString());
-                    dato.setText("");
-                    operador = true;
-                    op = "+";
+                if(dato.getText().toString().equals("")) {
+                }else{
+                    if (!operador) {
+                        acum = Integer.parseInt(dato.getText().toString());
+                        dato.setText("");
+                        operador = true;
+                        op = "+";
+                    }
                 }
                 break;
             case R.id.btnigual:
@@ -136,34 +143,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     dato.setText(acum * Integer.parseInt(dato.getText().toString()) + "");
                     operador = false;
                 }else if(op.equals("/")){
-                    dato.setText(acum / Integer.parseInt(dato.getText().toString()) + "");
+                   divi /= Integer.parseInt(dato.getText().toString());
+                    dato.setText( divi + "");
                     operador = false;
                 }
 
                 break;
-            case R.id.btnmenos:
 
-                if(!operador){
-                    acum = Integer.parseInt(dato.getText().toString());
-                    dato.setText("");
-                    operador = true;
-                    op = "-";
+            case R.id.btnc:
+                operador = false;
+                acum = 0;
+                dato.setText("");
+                igual = false;
+                op ="";
+                break;
+
+            case R.id.btnmenos:
+                if(dato.getText().toString().equals("")) {
+                }else {
+                    if (!operador) {
+                        acum = Integer.parseInt(dato.getText().toString());
+                        dato.setText("");
+                        operador = true;
+                        op = "-";
+                    }
                 }
                 break;
             case R.id.btnpor:
-                if(!operador){
-                    acum = Integer.parseInt(dato.getText().toString());
-                    dato.setText("");
-                    operador = true;
-                    op = "*";
+                if(dato.getText().toString().equals("")) {
+                }else {
+                    if (!operador) {
+                        acum = Integer.parseInt(dato.getText().toString());
+                        dato.setText("");
+                        operador = true;
+                        op = "*";
+                    }
                 }
                 break;
             case R.id.btndiv:
-                if(!operador){
-                    acum = Integer.parseInt(dato.getText().toString());
-                    dato.setText("");
-                    operador = true;
-                    op = "/";
+                if(dato.getText().toString().equals("")) {
+                }else {
+                    if (!operador) {
+                        divi = Integer.parseInt(dato.getText().toString());
+                        dato.setText("");
+                        operador = true;
+                        op = "/";
+                    }
+                }
+                break;
+            case R.id.btnsqrt:
+                if(dato.getText().toString().equals("")) {
+                }else {
+                    if (!operador) {
+                        divi = Integer.parseInt(dato.getText().toString());
+                        String aux = Math.sqrt(divi) + "";
+                        dato.setText(aux + "");
+                    }
+                }
+                break;
+            case R.id.btninv:
+                if(dato.getText().toString().equals("")) {
+                }else {
+                    divi = Integer.parseInt(dato.getText().toString());
+                    String aux = (1 / divi) + "";
+                    dato.setText(aux + "");
                 }
                 break;
         }
