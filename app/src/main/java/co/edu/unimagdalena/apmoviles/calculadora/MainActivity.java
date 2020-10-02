@@ -132,8 +132,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else if(op.equals("-")){
                     dato.setText(acum - Integer.parseInt(dato.getText().toString()) + "");
                     operador = false;
+                }else if(op.equals("*")){
+                    dato.setText(acum * Integer.parseInt(dato.getText().toString()) + "");
+                    operador = false;
+                }else if(op.equals("/")){
+                    dato.setText(acum / Integer.parseInt(dato.getText().toString()) + "");
+                    operador = false;
                 }
 
+                break;
+            case R.id.btnmenos:
+
+                if(!operador){
+                    acum = Integer.parseInt(dato.getText().toString());
+                    dato.setText("");
+                    operador = true;
+                    op = "-";
+                }
+                break;
+            case R.id.btnpor:
+                if(!operador){
+                    acum = Integer.parseInt(dato.getText().toString());
+                    dato.setText("");
+                    operador = true;
+                    op = "*";
+                }
+                break;
+            case R.id.btndiv:
+                if(!operador){
+                    acum = Integer.parseInt(dato.getText().toString());
+                    dato.setText("");
+                    operador = true;
+                    op = "/";
+                }
                 break;
         }
     }
