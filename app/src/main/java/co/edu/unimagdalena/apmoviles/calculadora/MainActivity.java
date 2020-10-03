@@ -15,8 +15,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText dato;
     Boolean operador = false;
     long acum = 0;
+    float acumf = 0;
     float divi = 0;
     Boolean igual = false;
+    Boolean f = false;
     long auxiliar = 0;
     float auxdivi = 0;
     String op;
@@ -64,6 +66,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bc.setOnClickListener(this);
         binv.setOnClickListener(this);
 
+    }
+
+    Boolean validarfloat(String dato){
+        Boolean decimal = false;
+        int i;
+        for(i = 0;i < dato.length() ;i++){
+            if(dato.charAt(i) == '.' ){
+                return true;
+
+            }
+        }
+
+
+        return decimal;
     }
 
     @Override
@@ -125,11 +141,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(dato.getText().toString().equals("")) {
                 }else{
                     if (!operador) {
-                        acum = Integer.parseInt(dato.getText().toString());
-                        dato.setText("");
-                        operador = true;
-                        op = "+";
-                        igual = false;
+
+                       if(validarfloat(dato.getText().toString())){
+                           acumf = Float.parseFloat(dato.getText().toString());
+                           f = true;
+                           dato.setText("");
+                           operador = true;
+                           op = "+";
+                           igual = false;
+                       }else {
+                           acum = Integer.parseInt(dato.getText().toString());
+                           dato.setText("");
+                           operador = true;
+                           op = "+";
+                           igual = false;
+                       }
+
                     }
                 }
                 break;
@@ -137,41 +164,92 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if(op.equals("+")){
 
-                    if(igual){
-                        dato.setText(Integer.parseInt(dato.getText().toString())+auxiliar+"");
-                    }else{
-                        auxiliar = Integer.parseInt(dato.getText().toString());
-                        dato.setText(acum + Integer.parseInt(dato.getText().toString()) + "");
-                        operador = false;
-                        igual = true;
+                    if(f==true){
+                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
+                        if (igual) {
+                            dato.setText(Float.parseFloat(dato.getText().toString()) + auxdivi + "");
+                        } else {
+                            auxdivi = Float.parseFloat(dato.getText().toString());
+                            dato.setText(acumf + Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
+                    }else {
+
+                        if (igual) {
+                            dato.setText(Integer.parseInt(dato.getText().toString()) + auxiliar + "");
+                        } else {
+                            auxiliar = Integer.parseInt(dato.getText().toString());
+                            dato.setText(acum + Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
+
                     }
+
                 }else if(op.equals("-")){
-                    if(igual){
-                        dato.setText(Integer.parseInt(dato.getText().toString()) - auxiliar + "");
-                    }else{
-                        auxiliar = Integer.parseInt(dato.getText().toString());
-                        dato.setText(acum - Integer.parseInt(dato.getText().toString()) + "");
-                        operador = false;
-                        igual = true;
+                    if(f==true){
+                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
+                        if (igual) {
+                            dato.setText(Float.parseFloat(dato.getText().toString()) - auxdivi + "");
+                        } else {
+                            auxdivi = Float.parseFloat(dato.getText().toString());
+                            dato.setText(acumf - Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
+                    }else {
+                        if (igual) {
+                            dato.setText(Integer.parseInt(dato.getText().toString()) - auxiliar + "");
+                        } else {
+                            auxiliar = Integer.parseInt(dato.getText().toString());
+                            dato.setText(acum - Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
                     }
                 }else if(op.equals("*")){
-                    if(igual){
-                        dato.setText(Integer.parseInt(dato.getText().toString()) * auxiliar + "");
-                    }else{
-                       auxiliar = Integer.parseInt(dato.getText().toString());
-                        dato.setText(acum * Integer.parseInt(dato.getText().toString()) + "");
-                        operador = false;
-                        igual = true;
+                    if(f==true){
+                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
+                        if (igual) {
+                            dato.setText(Float.parseFloat(dato.getText().toString()) * auxdivi + "");
+                        } else {
+                            auxdivi = Float.parseFloat(dato.getText().toString());
+                            dato.setText(acumf * Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
+                    }else {
+                        if (igual) {
+                            dato.setText(Integer.parseInt(dato.getText().toString()) * auxiliar + "");
+                        } else {
+                            auxiliar = Integer.parseInt(dato.getText().toString());
+                            dato.setText(acum * Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
                     }
                 }else if(op.equals("/")){
-                    if(igual){
-                        dato.setText(Float.parseFloat(dato.getText().toString()) / auxdivi + "");
+                    if(f==true){
+                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
+                        if (igual) {
+                            dato.setText(Float.parseFloat(dato.getText().toString()) / auxdivi + "");
+                        } else {
+                            auxdivi = Float.parseFloat(dato.getText().toString());
+                            dato.setText(acumf / Integer.parseInt(dato.getText().toString()) + "");
+                            operador = false;
+                            igual = true;
+                        }
                     }else {
-                        auxdivi = Integer.parseInt(dato.getText().toString());
-                        divi /= Integer.parseInt(dato.getText().toString());
-                        dato.setText(divi + "");
-                        operador = false;
-                        igual = true;
+                        if (igual) {
+                            dato.setText(Float.parseFloat(dato.getText().toString()) / auxdivi + "");
+                        } else {
+                            auxdivi = Integer.parseInt(dato.getText().toString());
+                            divi /= Integer.parseInt(dato.getText().toString());
+                            dato.setText(divi + "");
+                            operador = false;
+                            igual = true;
+                        }
                     }
                 }
 
@@ -183,17 +261,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dato.setText("");
                 igual = false;
                 op ="";
+                acumf=0;
+                f=false;
                 break;
 
             case R.id.btnmenos:
                 if(dato.getText().toString().equals("")) {
                 }else {
                     if (!operador) {
-                        acum = Integer.parseInt(dato.getText().toString());
-                        dato.setText("");
-                        operador = true;
-                        op = "-";
-                        igual = false;
+
+                        if(validarfloat(dato.getText().toString())){
+                            acumf = Float.parseFloat(dato.getText().toString());
+                            f = true;
+                            dato.setText("");
+                            operador = true;
+                            op = "-";
+                            igual = false;
+                        }else {
+                            acum = Integer.parseInt(dato.getText().toString());
+                            dato.setText("");
+                            operador = true;
+                            op = "-";
+                            igual = false;
+                        }
                     }
                 }
                 break;
@@ -201,11 +291,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(dato.getText().toString().equals("")) {
                 }else {
                     if (!operador) {
-                        acum = Integer.parseInt(dato.getText().toString());
-                        dato.setText("");
-                        operador = true;
-                        op = "*";
-                        igual = false;
+                        if(validarfloat(dato.getText().toString())){
+                            acumf = Float.parseFloat(dato.getText().toString());
+                            f = true;
+                            dato.setText("");
+                            operador = true;
+                            op = "*";
+                            igual = false;
+                        }else {
+                            acum = Integer.parseInt(dato.getText().toString());
+                            dato.setText("");
+                            operador = true;
+                            op = "*";
+                            igual = false;
+                        }
                     }
                 }
                 break;
@@ -213,11 +312,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(dato.getText().toString().equals("")) {
                 }else {
                     if (!operador) {
-                        divi = Integer.parseInt(dato.getText().toString());
-                        dato.setText("");
-                        operador = true;
-                        op = "/";
-                        igual = false;
+                        if(validarfloat(dato.getText().toString())){
+                            acumf = Float.parseFloat(dato.getText().toString());
+                            f = true;
+                            dato.setText("");
+                            operador = true;
+                            op = "/";
+                            igual = false;
+                        }else {
+                            divi = Integer.parseInt(dato.getText().toString());
+                            dato.setText("");
+                            operador = true;
+                            op = "/";
+                            igual = false;
+                        }
                     }
                 }
                 break;
@@ -225,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(dato.getText().toString().equals("")) {
                 }else {
                     if (!operador) {
-                        divi = Integer.parseInt(dato.getText().toString());
+                        divi = Float.parseFloat(dato.getText().toString());
                         String aux = Math.sqrt(divi) + "";
                         dato.setText(aux + "");
                     }
@@ -234,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btninv:
                 if(dato.getText().toString().equals("")) {
                 }else {
-                    divi = Integer.parseInt(dato.getText().toString());
+                    divi = Float.parseFloat(dato.getText().toString());
                     String aux = (1 / divi) + "";
                     dato.setText(aux + "");
                 }
