@@ -165,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(op.equals("+")){
 
                     if(f==true){
-                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
                         if (igual) {
                             dato.setText(Float.parseFloat(dato.getText().toString()) + auxdivi + "");
                         } else {
@@ -189,7 +188,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }else if(op.equals("-")){
                     if(f==true){
-                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
                         if (igual) {
                             dato.setText(Float.parseFloat(dato.getText().toString()) - auxdivi + "");
                         } else {
@@ -210,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }else if(op.equals("*")){
                     if(f==true){
-                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
                         if (igual) {
                             dato.setText(Float.parseFloat(dato.getText().toString()) * auxdivi + "");
                         } else {
@@ -231,7 +228,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }else if(op.equals("/")){
                     if(f==true){
-                        Toast.makeText(this,"entra",Toast.LENGTH_LONG).show();
                         if (igual) {
                             dato.setText(Float.parseFloat(dato.getText().toString()) / auxdivi + "");
                         } else {
