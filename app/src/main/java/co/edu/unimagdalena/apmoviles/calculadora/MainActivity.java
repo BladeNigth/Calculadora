@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     float divi = 0;
     Boolean igual = false;
     long auxiliar = 0;
+    float auxdivi = 0;
     String op;
 
     @Override
@@ -128,24 +129,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dato.setText("");
                         operador = true;
                         op = "+";
+                        igual = false;
                     }
                 }
                 break;
             case R.id.btnigual:
 
                 if(op.equals("+")){
-                    dato.setText(acum + Integer.parseInt(dato.getText().toString()) + "");
-                    operador = false;
+
+                    if(igual){
+                        dato.setText(Integer.parseInt(dato.getText().toString())+auxiliar+"");
+                    }else{
+                        auxiliar = Integer.parseInt(dato.getText().toString());
+                        dato.setText(acum + Integer.parseInt(dato.getText().toString()) + "");
+                        operador = false;
+                        igual = true;
+                    }
                 }else if(op.equals("-")){
-                    dato.setText(acum - Integer.parseInt(dato.getText().toString()) + "");
-                    operador = false;
+                    if(igual){
+                        dato.setText(Integer.parseInt(dato.getText().toString()) - auxiliar + "");
+                    }else{
+                        auxiliar = Integer.parseInt(dato.getText().toString());
+                        dato.setText(acum - Integer.parseInt(dato.getText().toString()) + "");
+                        operador = false;
+                        igual = true;
+                    }
                 }else if(op.equals("*")){
-                    dato.setText(acum * Integer.parseInt(dato.getText().toString()) + "");
-                    operador = false;
+                    if(igual){
+                        dato.setText(Integer.parseInt(dato.getText().toString()) * auxiliar + "");
+                    }else{
+                       auxiliar = Integer.parseInt(dato.getText().toString());
+                        dato.setText(acum * Integer.parseInt(dato.getText().toString()) + "");
+                        operador = false;
+                        igual = true;
+                    }
                 }else if(op.equals("/")){
-                   divi /= Integer.parseInt(dato.getText().toString());
-                    dato.setText( divi + "");
-                    operador = false;
+                    if(igual){
+                        dato.setText(Float.parseFloat(dato.getText().toString()) / auxdivi + "");
+                    }else {
+                        auxdivi = Integer.parseInt(dato.getText().toString());
+                        divi /= Integer.parseInt(dato.getText().toString());
+                        dato.setText(divi + "");
+                        operador = false;
+                        igual = true;
+                    }
                 }
 
                 break;
@@ -166,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dato.setText("");
                         operador = true;
                         op = "-";
+                        igual = false;
                     }
                 }
                 break;
@@ -177,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dato.setText("");
                         operador = true;
                         op = "*";
+                        igual = false;
                     }
                 }
                 break;
@@ -188,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dato.setText("");
                         operador = true;
                         op = "/";
+                        igual = false;
                     }
                 }
                 break;
